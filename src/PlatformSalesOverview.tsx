@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useParams  } from "react-router-dom";
 import { useSalesProvider } from './providers/SalesProvider';
 import { VictoryChart, VictoryBar } from "victory";
@@ -29,7 +30,39 @@ const PlatformSalesOverview: React.FC= () =>  {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      <h3>{platformName} sales overview</h3>
+      <div
+        css={{
+          alignItems: 'center',
+          display: 'flex',
+        }}
+      >
+        <h3
+          css={{
+            flexGrow: 1,
+            fontSize: '30px',
+            margin: '0',
+            paddingTop: '20px',
+            textAlign: 'center',
+            '@media (max-width: 809px)': {
+              fontSize: '24px',
+            }
+          }}
+        >
+          {platformName} sales overview
+        </h3>
+        <Link
+            css={{
+              color: '#000',
+              textDecoration: 'none',
+              fontWeight: 'bold',
+              fontSize: '20px',
+              padding: '20px 20px 0 0'
+            }}
+            to="/"
+          >
+            X
+          </Link>
+      </div>
       <div css={{
         display: 'flex',
         justifyContent: 'space-evenly',
