@@ -31,7 +31,12 @@ const SalesByPlataform: React.FC = () => {
     }, {});
 
   return (
-    <div>
+    <div
+      css={{
+        display: 'flex',
+        justifyContent: 'center'
+      }}
+    >
       {sales.length ?
         <GraphContainer
           css={{

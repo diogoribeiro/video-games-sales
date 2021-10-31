@@ -49,7 +49,6 @@ const PlatformSalesOverview: React.FC= () =>  {
           subtitle="Sales by genre"
         >
           <VictoryChart
-            animate={{ duration: 500 }}
             height={300}
             width={850}
             domainPadding={{ x: 1, y: [0, Object.keys(totalSoldByGenre).length] }}
