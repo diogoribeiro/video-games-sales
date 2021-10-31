@@ -1,26 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useHistory } from "react-router-dom";
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import { VictoryBar, VictoryChart, Bar } from "victory";
-import { SalesInfo, PlataformsSales } from '../types';
+import { PlataformsSales } from '../types';
+import { useSalesProvider } from '../providers/SalesProvider';
 
-import csvToJson from '../utils/csvToJson';
-
-
-const SalesByPlataform: React.FC= () => {
-  const [sales, setSales] = useState<SalesInfo[]>([]);
+const SalesByPlataform: React.FC = () => {
+  const {state} = useSalesProvider();
+  const sales = state.sales;
   const history = useHistory();
-
-  useEffect(() => {
-    async function loadCsv() {
-      const response = await fetch('https://raw.githubusercontent.com/diogoribeiro/datasets/main/video-game-sales.csv');
-      const csv = await response.text();
-      const salesInfo:SalesInfo[] = csvToJson(csv);
-      setSales(salesInfo);
-    };
-
-    loadCsv();
-  }, []);
 
   let plataformsSales = sales
     .reduce((plataforms:PlataformsSales, sale) => {
