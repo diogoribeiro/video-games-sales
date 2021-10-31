@@ -1,8 +1,27 @@
+import { useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom";
 import React from 'react';
 import { VictoryBar, VictoryChart, Bar } from "victory";
 import { SalesInfo, PlataformsSales } from '../types';
 
-const SalesByPlataform: React.FC<{sales: SalesInfo[]}> = ({ sales }) =>{
+import csvToJson from '../utils/csvToJson';
+
+
+const SalesByPlataform: React.FC= () => {
+  const [sales, setSales] = useState<SalesInfo[]>([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    async function loadCsv() {
+      const response = await fetch('https://raw.githubusercontent.com/diogoribeiro/datasets/main/video-game-sales.csv');
+      const csv = await response.text();
+      const salesInfo:SalesInfo[] = csvToJson(csv);
+      setSales(salesInfo);
+    };
+
+    loadCsv();
+  }, []);
+
   let plataformsSales = sales
     .reduce((plataforms:PlataformsSales, sale) => {
       if (!plataforms[sale.Platform]) plataforms[sale.Platform] = 0;
@@ -35,7 +54,7 @@ const SalesByPlataform: React.FC<{sales: SalesInfo[]}> = ({ sales }) =>{
               eventHandlers: {
                 onClick: () => ({
                   target: "data",
-                  mutation: (props) => console.log(props.datum.xName)
+                  mutation: (props) => history.push(`/platform/${props.datum.xName}`)
                 })
               }
             }

@@ -1,27 +1,14 @@
-import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SalesByPlataform from './components/SalesByPlataform';
-import csvToJson from './utils/csvToJson';
-
-import { SalesInfo } from './types';
-
+import PlatformSalesOverview from './PlatformSalesOverview';
 
 function App() {
-  const [sales, setSales] = useState<SalesInfo[]>([]);
-
-  useEffect(() => {
-    async function loadCsv() {
-      const response = await fetch('https://raw.githubusercontent.com/diogoribeiro/datasets/main/video-game-sales.csv');
-      const csv = await response.text();
-      const salesInfo:SalesInfo[] = csvToJson(csv);
-      setSales(salesInfo);
-    };
-
-    loadCsv();
-  }, []);
-
   return (
     <div>
-      <SalesByPlataform sales={sales} />
+      <Router>
+        <Route exact path="/" component={SalesByPlataform} />
+        <Route path="/platform/:platformName" component={PlatformSalesOverview} />
+      </Router>
     </div>
   );
 }
