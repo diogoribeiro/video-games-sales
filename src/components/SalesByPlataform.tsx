@@ -1,8 +1,12 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from '@emotion/react'
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import { VictoryBar, VictoryChart, Bar } from "victory";
+import { VictoryBar, VictoryChart } from "victory";
 import { PlataformsSales } from '../types';
 import { useSalesProvider } from '../providers/SalesProvider';
+import GraphContainer from './GraphContainer';
 
 const SalesByPlataform: React.FC = () => {
   const {state} = useSalesProvider();
@@ -29,32 +33,49 @@ const SalesByPlataform: React.FC = () => {
   return (
     <div>
       {sales.length ?
-        <VictoryChart
-          height={400}
-          width={800}
-          domainPadding={{ x: 1, y: [0, 20] }}
-          scale={{ x: "time" }}
-          events={[
-            {
-              target: "data",
-              childName: "plataforSalesChart",
-              eventHandlers: {
-                onClick: () => ({
-                  target: "data",
-                  mutation: (props) => history.push(`/platform/${props.datum.xName}`)
-                })
-              }
-            }
-          ]}
+        <GraphContainer
+          css={{
+            height: '500px',
+            width: '800px',
+            maxWidth: '100%',
+          }}
+          subtitle="Sales by platform"
         >
-          <VictoryBar
-            name="plataforSalesChart"
-            dataComponent={
-              <Bar events={{ onClick: console.log }}/>
-            }
-            data={Object.keys(plataformsSales).sort((pA, pB) => plataformsSales[pB] - plataformsSales[pA]).map((platform: string) =>({x: platform, y: plataformsSales[platform]}))}
-          />
-        </VictoryChart>:
+          <VictoryChart
+            height={500}
+            width={800}
+            domainPadding={{ x: 1, y: [0, 20] }}
+            scale={{ x: "time" }}
+            events={[
+              {
+                target: "data",
+                childName: "plataforSalesChart",
+                eventHandlers: {
+                  onClick: () => ({
+                    target: "data",
+                    mutation: (props) => history.push(`/platform/${props.datum.xName}`)
+                  }),
+                  onMouseOver: () => ({
+                    mutation: () => ({style: {fill: "orange", cursor: 'pointer'}})
+                  }),
+                  onMouseOut: () => ({
+                    mutation: () => ({style: {fill: "tomato"}})
+                  })
+                }
+              }
+            ]}
+          >
+            <VictoryBar
+              name="plataforSalesChart"
+              data={Object.keys(plataformsSales).sort((pA, pB) => plataformsSales[pB] - plataformsSales[pA]).map((platform: string) =>({x: platform, y: plataformsSales[platform]}))}
+              style={{
+                data: {
+                  fill: 'tomato',
+                }
+              }}
+            />
+          </VictoryChart>
+        </GraphContainer>:
         <span>Loading...</span>
       }
     </div>
