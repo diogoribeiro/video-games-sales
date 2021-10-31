@@ -1,24 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
+type SalesInfo = {
+  [key:string]: string
+}
+
+function csvToJson(csv: string):SalesInfo[] {
+  const csvLines:Array<string> = csv.split('\n');
+  const columns:Array<string> = csvLines[0].split(',');
+  const salesInfo:SalesInfo[] = csvLines.slice(1).map((line) => {
+    return line.split(',').reduce(
+      function (saleRow: SalesInfo, columnValue:string, columnIndex:number) {
+        saleRow[columns[columnIndex]] = columnValue
+
+        return saleRow;
+      },
+      {}
+    );
+  })
+
+  return salesInfo;
+}
+
 function App() {
+  const [sales, setSales] = useState<SalesInfo[]>([]);
+
+  useEffect(() => {
+    async function loadCsv() {
+      const response = await fetch('https://raw.githubusercontent.com/diogoribeiro/datasets/main/video-game-sales.csv');
+      const csv = await response.text();
+      const salesInfo:SalesInfo[] = csvToJson(csv);
+      setSales(salesInfo);
+    };
+
+    loadCsv();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {sales.length ?
+        <span>Sales info</span>:
+        <span>Loading...</span>
+      }
     </div>
   );
 }
