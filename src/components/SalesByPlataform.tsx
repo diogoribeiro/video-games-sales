@@ -33,56 +33,81 @@ const SalesByPlataform: React.FC = () => {
   return (
     <div
       css={{
+        alignItems: 'center',
         display: 'flex',
-        justifyContent: 'center'
+        flexDirection: 'column',
+        paddingTop: '20px',
+        maxWidth: '100vw',
+        width: '100vw'
       }}
     >
-      {sales.length ?
-        <GraphContainer
+      <div
+        css={{
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <p
           css={{
-            height: '500px',
-            width: '800px',
-            maxWidth: '100%',
+            textAlign: 'center',
+            margin: 0,
           }}
-          subtitle="Sales by platform"
         >
-          <VictoryChart
-            height={500}
-            width={800}
-            domainPadding={{ x: 1, y: [0, 20] }}
-            scale={{ x: "time" }}
-            events={[
-              {
-                target: "data",
-                childName: "plataforSalesChart",
-                eventHandlers: {
-                  onClick: () => ({
-                    target: "data",
-                    mutation: (props) => history.push(`/platform/${props.datum.xName}`)
-                  }),
-                  onMouseOver: () => ({
-                    mutation: () => ({style: {fill: "orange", cursor: 'pointer'}})
-                  }),
-                  onMouseOut: () => ({
-                    mutation: () => ({style: {fill: "tomato"}})
-                  })
-                }
+          The following graph shows the number of video game sales for the 20 most popular platforms since 1980.
+        </p>
+        <p
+          css={{
+            textAlign: 'center',
+            margin: 0,
+          }}
+        >
+          You may click on the platform bar to get more details about its sales.
+        </p>
+      </div>
+      <GraphContainer
+        css={{
+          height: '500px',
+          width: '800px',
+          maxWidth: '100%',
+        }}
+        subtitle="Sales by platform"
+      >
+        <VictoryChart
+          height={500}
+          width={800}
+          domainPadding={{ x: 1, y: [0, 20] }}
+          scale={{ x: "time" }}
+          events={[
+            {
+              target: "data",
+              childName: "plataforSalesChart",
+              eventHandlers: {
+                onClick: () => ({
+                  target: "data",
+                  mutation: (props) => history.push(`/platform/${props.datum.xName}`)
+                }),
+                onMouseOver: () => ({
+                  mutation: () => ({style: {fill: "orange", cursor: 'pointer'}})
+                }),
+                onMouseOut: () => ({
+                  mutation: () => ({style: {fill: "tomato"}})
+                })
               }
-            ]}
-          >
-            <VictoryBar
-              name="plataforSalesChart"
-              data={Object.keys(plataformsSales).sort((pA, pB) => plataformsSales[pB] - plataformsSales[pA]).map((platform: string) =>({x: platform, y: plataformsSales[platform]}))}
-              style={{
-                data: {
-                  fill: 'tomato',
-                }
-              }}
-            />
-          </VictoryChart>
-        </GraphContainer>:
-        <span>Loading...</span>
-      }
+            }
+          ]}
+        >
+          <VictoryBar
+            name="plataforSalesChart"
+            data={Object.keys(plataformsSales).sort((pA, pB) => plataformsSales[pB] - plataformsSales[pA]).map((platform: string) =>({x: platform, y: plataformsSales[platform]}))}
+            style={{
+              data: {
+                fill: 'tomato',
+              }
+            }}
+          />
+        </VictoryChart>
+      </GraphContainer>
     </div>
   );
 }

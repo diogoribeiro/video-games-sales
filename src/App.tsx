@@ -13,11 +13,15 @@ import { jsx } from '@emotion/react'
 
 const App:React.FC = () => {
   const store = useStore();
-  const { loadSales } = store.actions;
+  const { actions, state } = store;
+  const { loadSales } = actions;
+  const sales = state.sales;
 
   useEffect(() => {
     loadSales();
   }, [loadSales]);
+
+  if (!sales.length) return <div>Loading...</div>
 
   return (
     <Router>

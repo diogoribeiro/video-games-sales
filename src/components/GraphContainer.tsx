@@ -14,7 +14,8 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ subtitle, children, cla
     {children}
     <span css={{
       display: 'block',
-      textAlign: 'center'
+      fontWeight: 'bold',
+      textAlign: 'center',
     }}>
       {subtitle}
     </span>
