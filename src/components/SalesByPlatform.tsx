@@ -59,7 +59,7 @@ const SalesByPlatform: React.FC = () => {
             margin: 0,
           }}
         >
-          The following graph shows the number of video game sales for the 20 most popular platforms since 1980.
+          The following graph shows the number of video games sales for the 20 most popular platforms since 1980.
         </p>
         <p
           css={{

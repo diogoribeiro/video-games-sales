@@ -60,7 +60,7 @@ const App:React.FC = () => {
                 fontSize: '36px',
               }
             }}>
-              Video game sales
+              Video games sales
             </h1>
           </Link>
         </header>
