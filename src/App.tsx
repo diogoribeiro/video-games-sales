@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import PlatformSalesOverview from './PlatformSalesOverview';
+import PlatformSalesOverview from './components/PlatformSalesOverview';
 import SalesByPlatform from './components/SalesByPlatform';
 import { SalesProvider } from './providers/SalesProvider';
 import useStore from './store';

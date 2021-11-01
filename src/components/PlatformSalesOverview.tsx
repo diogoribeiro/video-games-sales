@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useParams  } from "react-router-dom";
-import { useSalesProvider } from './providers/SalesProvider';
+import { useSalesProvider } from '../providers/SalesProvider';
 import { VictoryChart, VictoryBar } from "victory";
-import { PlataformsSales } from './types';
+import { PlataformsSales } from '../types';
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from '@emotion/react'
-import SalesByRegion from './components/SalesByRegion';
-import GraphContainer from './components/GraphContainer';
+import SalesByRegion from './SalesByRegion';
+import GraphContainer from './GraphContainer';
 
 const PlatformSalesOverview: React.FC= () =>  {
   const { platformName } = useParams<{platformName: string}>();
