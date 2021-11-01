@@ -23,12 +23,17 @@ const SalesByPlataform: React.FC = () => {
     }, {})
 
   plataformsSales = Object.keys(plataformsSales)
+    .sort((pA, pB) => plataformsSales[pB] - plataformsSales[pA])
     .slice(0, 20)
     .reduce((plataforms:PlataformsSales, platform) => {
       plataforms[platform] = plataformsSales[platform];
 
       return plataforms;
     }, {});
+
+  const chartData = Object.keys(plataformsSales)
+    .sort((pA, pB) => plataformsSales[pB] - plataformsSales[pA])
+    .map((platform: string) =>({x: platform, y: plataformsSales[platform]}))
 
   return (
     <div
@@ -99,7 +104,7 @@ const SalesByPlataform: React.FC = () => {
         >
           <VictoryBar
             name="plataforSalesChart"
-            data={Object.keys(plataformsSales).sort((pA, pB) => plataformsSales[pB] - plataformsSales[pA]).map((platform: string) =>({x: platform, y: plataformsSales[platform]}))}
+            data={chartData}
             style={{
               data: {
                 fill: 'tomato',
