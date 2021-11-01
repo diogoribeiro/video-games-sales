@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import PlatformSalesOverview from './PlatformSalesOverview';
-import SalesByPlataform from './components/SalesByPlataform';
+import SalesByPlatform from './components/SalesByPlatform';
 import { SalesProvider } from './providers/SalesProvider';
 import useStore from './store';
 import bg from './bg.jpg';
@@ -70,7 +70,7 @@ const App:React.FC = () => {
           }}
         >
           <SalesProvider value={store}>
-            <Route exact path="/" component={SalesByPlataform} />
+            <Route exact path="/" component={SalesByPlatform} />
             <Route path="/platform/:platformName" component={PlatformSalesOverview} />
           </SalesProvider>
         </main>

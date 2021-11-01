@@ -8,7 +8,7 @@ import { PlataformsSales } from '../types';
 import { useSalesProvider } from '../providers/SalesProvider';
 import GraphContainer from './GraphContainer';
 
-const SalesByPlataform: React.FC = () => {
+const SalesByPlatform: React.FC = () => {
   const {state} = useSalesProvider();
   const sales = state.sales;
   const history = useHistory();
@@ -117,4 +117,4 @@ const SalesByPlataform: React.FC = () => {
   );
 }
 
-export default SalesByPlataform;
+export default SalesByPlatform;
