@@ -15,7 +15,7 @@ const PlatformSalesOverview: React.FC= () =>  {
   const { state } = useSalesProvider();
   const sales = state.sales;
 
-  let totalSoldByGenre = sales
+  const totalSoldByGenre = sales
     .filter(sale => sale.Platform === platformName)
     .reduce((plataforms:PlataformsSales, sale) => {
       if (!plataforms[sale.Genre]) plataforms[sale.Genre] = 0;
@@ -23,7 +23,12 @@ const PlatformSalesOverview: React.FC= () =>  {
       if(totalSales) plataforms[sale.Genre] += totalSales;
 
       return plataforms;
-    }, {})
+    }, {});
+
+  const genreSalesData = Object.keys(totalSoldByGenre)
+    .sort((genreA, genreB) => totalSoldByGenre[genreB] - totalSoldByGenre[genreA])
+    .slice(0, 10)
+    .map((genre: string) =>({x: genre, y: totalSoldByGenre[genre]}))
 
   return (
     <div css={{
@@ -89,7 +94,7 @@ const PlatformSalesOverview: React.FC= () =>  {
           >
             <VictoryBar
               name="genreSalesChart"
-              data={Object.keys(totalSoldByGenre).sort((genreA, genreB) => totalSoldByGenre[genreB] - totalSoldByGenre[genreA]).slice(0, 10).map((genre: string) =>({x: genre, y: totalSoldByGenre[genre]}))}
+              data={genreSalesData}
               style={{
                 data: {
                   fill: 'tomato',
