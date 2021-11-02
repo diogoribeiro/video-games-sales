@@ -5,6 +5,7 @@ import SalesByPlatform from './components/SalesByPlatform';
 import { SalesProvider } from './providers/SalesProvider';
 import useStore from './store';
 import './App.css';
+import bg from './bg.jpg';
 
 /** @jsxRuntime classic */
 /** @jsx jsx */
@@ -69,6 +70,23 @@ const App:React.FC = () => {
             maxWidth: '100vw',
           }}
         >
+          <div
+            css={{
+              '&:after': {
+                background: `url(${bg}) no-repeat, #ffffff`,
+                backgroundBlendMode: 'exclusion',
+                content: '" "',
+                display: 'block',
+                left: 0,
+                height: '100%',
+                opacity: 0.05,
+                position: 'absolute',
+                top: 0,
+                width: '100%',
+                zIndex: -1,
+              }
+            }}
+          />
           <SalesProvider value={store}>
             <Route exact path="/" component={SalesByPlatform} />
             <Route path="/platform/:platformName" component={PlatformSalesOverview} />
