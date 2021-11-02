@@ -2,7 +2,7 @@ import React from "react";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from '@emotion/react'
-import { SalesSummary, PlataformsSales } from '../types';
+import { SalesSummary } from '../types';
 import PercentageGraph from './PercentageGraph';
 import countSalesByGenere from "../utils/countSalesByGenre";
 
