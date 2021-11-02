@@ -1,31 +1,11 @@
 import React from "react";
 import { SalesSummary, PlataformsSales } from '../types';
 import PercentageGraph from "./PercentageGraph";
+import findMostSalesRegion from "../utils/findMostSalesRegion";
 
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from '@emotion/react'
-
-
-function findMostSalesRegion(totalSoldByRegion: PlataformsSales, totalSoldByAllRegions: number) {
-  return Object.keys(totalSoldByRegion).reduce((mostSalesRegion, currentRegion) => {
-    if (totalSoldByRegion[currentRegion] > mostSalesRegion?.totalSold) {
-      const totalSold = totalSoldByRegion[currentRegion];
-
-      return {
-        totalSold,
-        percentage: (totalSold/totalSoldByAllRegions) * 100,
-        region: currentRegion,
-      }
-    }
-
-    return mostSalesRegion;
-  }, {
-    region: 'no region',
-    totalSold: 0,
-    percentage: 0,
-  });
-}
 
 const SalesByRegion: React.FC<SalesSummary>= ({ sales, totalSold }) =>  {
   const totalSoldByRegion = sales

@@ -4,18 +4,11 @@ import React from "react";
 import { jsx } from '@emotion/react'
 import { SalesSummary, PlataformsSales } from '../types';
 import PercentageGraph from './PercentageGraph';
+import countSalesByGenere from "../utils/countSalesByGenre";
 
 const GenreSalesSummary: React.FC<SalesSummary>= ({ sales, totalSold }) =>  {
   const colors = ["#F58067", "#FA5D97", "#473f49"];
-
-  const genresSalesInfo = sales
-    .reduce((plataforms:PlataformsSales, sale) => {
-      if (!plataforms[sale.Genre]) plataforms[sale.Genre] = 0;
-      const totalSales = parseFloat(sale.Global_Sales);
-      if(totalSales) plataforms[sale.Genre] += totalSales;
-
-      return plataforms;
-    }, {});
+  const genresSalesInfo = countSalesByGenere(sales);
 
   return (
     <>

@@ -20,6 +20,7 @@ const SalesByPlatform: React.FC = () => {
   const genres = countGenres(sales);
   let plataformsSales = countSalesByPlatform(sales, 'Global_Sales');
   const totalPlatforms = Object.keys(plataformsSales).length;
+  const totalGenres = Object.keys(genres).length;
 
   plataformsSales = Object.keys(plataformsSales)
     .sort((pA, pB) => plataformsSales[pB] - plataformsSales[pA])
@@ -80,8 +81,8 @@ const SalesByPlatform: React.FC = () => {
             width: '33%'
           }}
         >
-          <p>{Object.keys(genres).length}</p>
-          <p>Platforms</p>
+          <p>{totalGenres}</p>
+          <p>Genres</p>
         </div>
       </div>
 
