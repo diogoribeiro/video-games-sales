@@ -4,7 +4,7 @@ import PlatformSalesOverview from './components/PlatformSalesOverview';
 import SalesByPlatform from './components/SalesByPlatform';
 import { SalesProvider } from './providers/SalesProvider';
 import useStore from './store';
-import bg from './bg.jpg';
+import './App.css';
 
 /** @jsxRuntime classic */
 /** @jsx jsx */
@@ -35,38 +35,38 @@ const App:React.FC = () => {
       >
         <header
           css={{
-            alignItems: 'center',
-            background: `url(${bg}) no-repeat, rgb(255, 255, 255)`,
-            borderBottom: '1px dashed #000',
-            backgroundBlendMode: 'exclusion',
+            alignItems: 'flex-start',
+            background: '#de5752',
             display: 'flex',
-            height: '300px',
-            justifyContent: 'center'
+            height: '200px',
+            justifyContent: 'center',
           }}
         >
           <Link
             css={{
+              color: '#FFFFFF',
+              textAlign: 'center',
               textDecoration: 'none',
             }}
             to="/"
           >
             <h1 css={{
-              background: '#fff',
-              color: '#000',
-              textAlign: 'center',
-              fontSize: '60px',
-              textShadow: '2px 2px #FFF',
+              fontFamily: 'Bowlby One, cursive',
+              fontSize: '50px',
               '@media (max-width: 809px)': {
                 fontSize: '36px',
-              }
+              },
+              marginBottom: '0',
             }}>
               Video games sales
             </h1>
+            <span>Since 1980</span>
           </Link>
         </header>
         <main
           css={{
-            flexGrow: 1,
+            flex: 1,
+            maxWidth: '100vw',
           }}
         >
           <SalesProvider value={store}>
@@ -77,9 +77,11 @@ const App:React.FC = () => {
         <footer
           css={{
             alignItems: 'center',
+            background: '#F58067',
+            color: '#FFF',
             display: 'flex',
+            height: '36px',
             justifyContent: 'center',
-            padding: '20px 0',
           }}
           >
           <span>Developed by Diogo Ribeiro</span>

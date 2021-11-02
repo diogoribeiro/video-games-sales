@@ -2,38 +2,32 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useParams  } from "react-router-dom";
 import { useSalesProvider } from '../providers/SalesProvider';
-import { VictoryChart, VictoryBar } from "victory";
-import { PlataformsSales } from '../types';
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from '@emotion/react'
 import SalesByRegion from './SalesByRegion';
-import GraphContainer from './GraphContainer';
+import GenreSalesSummary from './GenreSalesSummary'
 
 const PlatformSalesOverview: React.FC= () =>  {
   const { platformName } = useParams<{platformName: string}>();
   const { state } = useSalesProvider();
   const sales = state.sales;
 
-  const totalSoldByGenre = sales
-    .filter(sale => sale.Platform === platformName)
-    .reduce((plataforms:PlataformsSales, sale) => {
-      if (!plataforms[sale.Genre]) plataforms[sale.Genre] = 0;
-      const totalSales = parseFloat(sale.Global_Sales);
-      if(totalSales) plataforms[sale.Genre] += totalSales;
+  const platformSales = sales.filter(sale => sale.Platform === platformName)
 
-      return plataforms;
-    }, {});
+  // TODO refactor reducer
+  const totalSoldByPlatform = platformSales
+    .reduce((total, sale) => {
+      total += parseFloat(sale.Global_Sales) || 0;
 
-  const genreSalesData = Object.keys(totalSoldByGenre)
-    .sort((genreA, genreB) => totalSoldByGenre[genreB] - totalSoldByGenre[genreA])
-    .slice(0, 10)
-    .map((genre: string) =>({x: genre, y: totalSoldByGenre[genre]}))
+      return total;
+    }, 0);
 
   return (
     <div css={{
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      height: '100%',
     }}>
       <div
         css={{
@@ -43,11 +37,11 @@ const PlatformSalesOverview: React.FC= () =>  {
       >
         <h3
           css={{
+            color: '#f9b3a0',
             flexGrow: 1,
             fontSize: '30px',
             margin: '0',
             paddingTop: '20px',
-            textAlign: 'center',
             '@media (max-width: 809px)': {
               fontSize: '24px',
             }
@@ -57,7 +51,7 @@ const PlatformSalesOverview: React.FC= () =>  {
         </h3>
         <Link
             css={{
-              color: '#000',
+              color: '#473f49',
               textDecoration: 'none',
               fontWeight: 'bold',
               fontSize: '20px',
@@ -68,42 +62,38 @@ const PlatformSalesOverview: React.FC= () =>  {
             X
           </Link>
       </div>
+      <div
+        css={{
+          textAlign: 'center'
+        }}
+      >
+        <p>
+          {platformName} sold {Math.floor(totalSoldByPlatform)} video games across the globe since {Math.min(...platformSales.map(sale => parseInt(sale.Year_of_Release) || new Date().getFullYear()))}
+        </p>
+        <p>
+          Here is how it was distributed by region and genre.
+        </p>
+      </div>
       <div css={{
+        alignItems: 'center',
         display: 'flex',
         justifyContent: 'space-evenly',
         '@media (max-width: 809px)': {
           flexDirection: 'column',
         }
       }}>
-
-        <SalesByRegion sales={sales} platformName={platformName} />
-
-        <GraphContainer
-          css={{
-            height: '300px',
-            width: '700px',
-            maxWidth: '100%',
-          }}
-          subtitle="Sales by genre"
-        >
-          <VictoryChart
-            height={300}
-            width={850}
-            domainPadding={{ x: 1, y: [0, Object.keys(totalSoldByGenre).length] }}
-            scale={{ x: "time" }}
-          >
-            <VictoryBar
-              name="genreSalesChart"
-              data={genreSalesData}
-              style={{
-                data: {
-                  fill: 'tomato',
-                  fillOpacity: 0.7
-                }
-              }}
-            />
-          </VictoryChart>
-        </GraphContainer>
+        <SalesByRegion sales={platformSales} totalSold={totalSoldByPlatform} />
+        <div css={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'flex-start',
+          width: '50%',
+          '@media (max-width: 809px)': {
+            width: '100%',
+          }
+        }}>
+          <GenreSalesSummary sales={platformSales} totalSold={totalSoldByPlatform} />
+        </div>
       </div>
     </div>
   );
