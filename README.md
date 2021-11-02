@@ -1,5 +1,7 @@
+**The live version of the app can be found at: https://eloquent-ritchie-a586f7.netlify.app/**
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
-The graphs were built using `victory`
+The graphs were built using [victory](https://formidable.com/open-source/victory/)
 
 Since it's a small project that doesn't have a complex data flow, it isn't using any state management lib.\
 Instead, it's leveraging `useReducer` and the [react context api](https://reactjs.org/docs/context.html) to handle data flow and management.
