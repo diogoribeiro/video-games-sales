@@ -3,40 +3,22 @@
 import { jsx } from '@emotion/react'
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import { GenresSales, PlataformsSales } from '../types';
+import { PlataformsSales } from '../types';
 import { useSalesProvider } from '../providers/SalesProvider';
 import PlatformsSalesGraph from './PlatformsSalesGraph';
+
+import countTotalSold from '../utils/countTotalSold';
+import countGenres from '../utils/countUniqueGenres';
+import countSalesByPlatform from '../utils/countSalesByPlatform';
 
 const SalesByPlatform: React.FC = () => {
   const {state} = useSalesProvider();
   const sales = state.sales;
   const history = useHistory();
 
-// TODO refactor all these reducers
-  const totalSold = sales
-    .reduce((total, sale) => {
-      const totalSales = parseFloat(sale.Global_Sales);
-      if(totalSales) total += totalSales;
-
-      return total;
-    }, 0);
-
-  const genres = sales
-    .reduce((genres:GenresSales, sale) => {
-      if (!genres[sale.Genre]) genres[sale.Genre] = 1;
-
-      return genres;
-    }, {});
-
-    let plataformsSales = sales
-    .reduce((plataforms:PlataformsSales, sale) => {
-      if (!plataforms[sale.Platform]) plataforms[sale.Platform] = 0;
-      const totalSales = parseFloat(sale.Global_Sales);
-      if(totalSales) plataforms[sale.Platform] += totalSales;
-
-      return plataforms;
-    }, {});
-
+  const totalSold = countTotalSold(sales);
+  const genres = countGenres(sales);
+  let plataformsSales = countSalesByPlatform(sales, 'Global_Sales');
   const totalPlatforms = Object.keys(plataformsSales).length;
 
   plataformsSales = Object.keys(plataformsSales)

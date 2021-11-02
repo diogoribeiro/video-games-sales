@@ -15,7 +15,6 @@ const PlatformSalesOverview: React.FC= () =>  {
 
   const platformSales = sales.filter(sale => sale.Platform === platformName)
 
-  // TODO refactor reducer
   const totalSoldByPlatform = platformSales
     .reduce((total, sale) => {
       total += parseFloat(sale.Global_Sales) || 0;
@@ -50,17 +49,17 @@ const PlatformSalesOverview: React.FC= () =>  {
           {platformName} sales overview
         </h3>
         <Link
-            css={{
-              color: '#473f49',
-              textDecoration: 'none',
-              fontWeight: 'bold',
-              fontSize: '20px',
-              padding: '20px 20px 0 0'
-            }}
-            to="/"
-          >
-            X
-          </Link>
+          css={{
+            color: '#473f49',
+            textDecoration: 'none',
+            fontWeight: 'bold',
+            fontSize: '20px',
+            padding: '20px 20px 0 0'
+          }}
+          to="/"
+        >
+          X
+        </Link>
       </div>
       <div
         css={{

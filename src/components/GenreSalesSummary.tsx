@@ -7,7 +7,7 @@ import PercentageGraph from './PercentageGraph';
 
 const GenreSalesSummary: React.FC<SalesSummary>= ({ sales, totalSold }) =>  {
   const colors = ["#F58067", "#FA5D97", "#473f49"];
-  // TODO refactor reducer
+
   const genresSalesInfo = sales
     .reduce((plataforms:PlataformsSales, sale) => {
       if (!plataforms[sale.Genre]) plataforms[sale.Genre] = 0;

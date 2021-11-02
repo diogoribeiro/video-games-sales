@@ -7,7 +7,7 @@ import PercentageGraph from "./PercentageGraph";
 import { jsx } from '@emotion/react'
 
 
-function findMostSaleRegion(totalSoldByRegion: PlataformsSales, totalSoldByAllRegions: number) {
+function findMostSalesRegion(totalSoldByRegion: PlataformsSales, totalSoldByAllRegions: number) {
   return Object.keys(totalSoldByRegion).reduce((mostSalesRegion, currentRegion) => {
     if (totalSoldByRegion[currentRegion] > mostSalesRegion?.totalSold) {
       const totalSold = totalSoldByRegion[currentRegion];
@@ -43,9 +43,9 @@ const SalesByRegion: React.FC<SalesSummary>= ({ sales, totalSold }) =>  {
       'Others': 0,
     });
 
-  const mostSaleRegionInfo = findMostSaleRegion(totalSoldByRegion, totalSold);
+  const mostSaleRegionInfo = findMostSalesRegion(totalSoldByRegion, totalSold);
 
-  const a = Object.keys(totalSoldByRegion)
+  const regionsSummary = Object.keys(totalSoldByRegion)
     .filter(region => (region !== mostSaleRegionInfo.region))
     .map(region => (
       <div key={region}>
@@ -84,7 +84,7 @@ const SalesByRegion: React.FC<SalesSummary>= ({ sales, totalSold }) =>  {
           total: mostSaleRegionInfo.totalSold,
         }}
       />
-      {a}
+      {regionsSummary}
     </div>
   );
 }
