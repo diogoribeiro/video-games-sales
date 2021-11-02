@@ -4,7 +4,6 @@ import clone from '../utils/clone';
 import csvToJson from '../utils/csvToJson';
 
 type AppState = {
-  loading?: boolean,
   sales: SalesInfo[]
 };
 
@@ -32,15 +31,15 @@ function reducer(state: AppState, action: Action) {
 }
 
 function useStore() {
-  const [state, dispatch] = useReducer(reducer, { loading:false, sales: [] });
+  const [state, dispatch] = useReducer(reducer, { sales: [] });
 
   const actions = {
     loadSales:  useCallback(async () => {
       const response = await fetch('https://raw.githubusercontent.com/diogoribeiro/datasets/main/video-game-sales.csv');
       const csv = await response.text();
       const sales:SalesInfo[] = csvToJson(csv);
-      // TODO remove `loading`
-      dispatch({type: ActionType.LOAD_SALES_SUCCESS, payload: { sales, loading: false } });
+
+      dispatch({type: ActionType.LOAD_SALES_SUCCESS, payload: { sales } });
     }, []),
   };
 
