@@ -1,0 +1,50 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 100%;
+}
+
+.header {
+  background: #473f49;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+  width: 100%;
+}
+
+.header-section {
+  width: 33%;
+}
+
+.body-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  font-weight: bold;
+}
+
+.copy {
+  text-align: center;
+  margin: 0;
+}
+
+.graph-container {
+  padding-top: 20px;
+  width: 60%;
+}
+
+@media (max-width: 809px) {
+  .header {
+    font-size: 20px;
+  }
+
+  .graph-container {
+    width: 80%
+  }
+}

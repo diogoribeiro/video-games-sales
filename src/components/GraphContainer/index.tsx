@@ -1,7 +1,5 @@
 import React from 'react';
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx } from '@emotion/react'
+import styles from './GraphContainer.module.css';
 
 type GraphContainerProps = {
   className?: string
@@ -12,11 +10,7 @@ type GraphContainerProps = {
 const GraphContainer: React.FC<GraphContainerProps> = ({ subtitle, children, className }) => (
   <div className={className}>
     {children}
-    <span css={{
-      display: 'block',
-      fontWeight: 'bold',
-      textAlign: 'center',
-    }}>
+    <span className={styles.title}>
       {subtitle}
     </span>
   </div>

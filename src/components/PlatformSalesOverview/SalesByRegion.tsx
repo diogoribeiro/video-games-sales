@@ -1,11 +1,8 @@
 import React from "react";
-import { SalesSummary, PlataformsSales } from '../types';
+import { SalesSummary, PlataformsSales } from '../../types';
 import PercentageGraph from "./PercentageGraph";
-import findMostSalesRegion from "../utils/findMostSalesRegion";
-
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx } from '@emotion/react'
+import findMostSalesRegion from "../../utils/findMostSalesRegion";
+import styles from './SalesByRegion.module.css';
 
 const SalesByRegion: React.FC<SalesSummary>= ({ sales, totalSold }) =>  {
   const totalSoldByRegion = sales
@@ -29,33 +26,17 @@ const SalesByRegion: React.FC<SalesSummary>= ({ sales, totalSold }) =>  {
     .filter(region => (region !== mostSaleRegionInfo.region))
     .map(region => (
       <div key={region}>
-        <span
-          css={{
-            fontWeight: 'bold',
-            fontSize: '16px',
-            marginRight: '5px',
-          }}
-        >
+        <span className={styles['region-name']}>
           {region}:
         </span>
-        <span
-          css={{
-            fontSize: '16px',
-          }}
-        >
+        <span className={styles['region-total']}>
           { ((totalSoldByRegion[region]/totalSold) * 100).toFixed(2) }%
         </span>
       </div>
     ));
 
   return (
-    <div
-      css={{
-        alignItems: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <div className={styles.container}>
       <PercentageGraph
         color="#FAA85D"
         percentageInfo={{

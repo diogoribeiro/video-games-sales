@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header-container {
+  align-items: center;
+  display: flex;
+}
+
+.title {
+  color: #f9b3a0;
+  flex-grow: 1;
+  font-size: 30px;
+  margin: 0;
+  padding-top: 20px;
+}
+
+.close-button {
+  color: #473f49;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 20px 0 0;
+}
+
+.copy {
+  text-align: center;
+}
+
+.graphs-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  @media (max-width: 809px) {
+    flex-direction: column;
+  }
+}
+
+.genre-graph-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 50%;
+}
+
+@media (max-width: 809px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .genre-graph-container {
+    width: 100%;
+  } 
+}
