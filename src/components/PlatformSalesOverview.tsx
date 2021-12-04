@@ -13,11 +13,11 @@ const PlatformSalesOverview: React.FC= () =>  {
   const { state } = useSalesProvider();
   const sales = state.sales;
 
-  const platformSales = sales.filter(sale => sale.Platform === platformName)
+  const platformSales = sales.filter(sale => sale.platform === platformName)
 
   const totalSoldByPlatform = platformSales
     .reduce((total, sale) => {
-      total += parseFloat(sale.Global_Sales) || 0;
+      total += sale.globalSales || 0;
 
       return total;
     }, 0);
@@ -67,7 +67,7 @@ const PlatformSalesOverview: React.FC= () =>  {
         }}
       >
         <p>
-          {platformName} sold {Math.floor(totalSoldByPlatform)} video games across the globe since {Math.min(...platformSales.map(sale => parseInt(sale.Year_of_Release) || new Date().getFullYear()))}
+          {platformName} sold {Math.floor(totalSoldByPlatform)} video games across the globe since {Math.min(...platformSales.map(sale => sale.releaseYear || new Date().getFullYear()))}
         </p>
         <p>
           Here is how it was distributed by region and genre.

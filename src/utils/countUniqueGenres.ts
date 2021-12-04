@@ -1,8 +1,8 @@
-import { GenresSales, SalesInfo } from "../types";
+import { GenresSales, Sale } from "../types";
 
-function countUniqueGenres(sales: SalesInfo[]) {
+function countUniqueGenres(sales: Sale[]) {
   return sales.reduce((genres:GenresSales, sale) => {
-    if (!genres[sale.Genre]) genres[sale.Genre] = 1;
+    if (!genres[sale.genre]) genres[sale.genre] = 1;
   
     return genres;
   }, {});

@@ -1,11 +1,11 @@
-import { PlataformsSales, SalesInfo } from "../types";
+import { PlataformsSales, Sale } from "../types";
 
-function countSales (sales: SalesInfo[], salesField: string) {
+function countSales (sales: Sale[], salesField: 'naSales'|'euSales'|'jpSales'|'otherSales'|'globalSales') {
   return sales
     .reduce((plataforms:PlataformsSales, sale) => {
-      if (!plataforms[sale.Platform]) plataforms[sale.Platform] = 0;
-      const totalSales = parseFloat(sale[salesField]);
-      if(totalSales) plataforms[sale.Platform] += totalSales;
+      if (!plataforms[sale.platform]) plataforms[sale.platform] = 0;
+      const totalSales:number = sale[salesField];
+      if(totalSales) plataforms[sale.platform] += totalSales;
 
       return plataforms;
     }, {});

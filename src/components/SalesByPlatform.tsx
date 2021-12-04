@@ -18,7 +18,7 @@ const SalesByPlatform: React.FC = () => {
 
   const totalSold = countTotalSold(sales);
   const genres = countGenres(sales);
-  let plataformsSales = countSalesByPlatform(sales, 'Global_Sales');
+  let plataformsSales = countSalesByPlatform(sales, 'globalSales');
   const totalPlatforms = Object.keys(plataformsSales).length;
   const totalGenres = Object.keys(genres).length;
 

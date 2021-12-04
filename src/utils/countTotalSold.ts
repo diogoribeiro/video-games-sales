@@ -1,8 +1,8 @@
-import { SalesInfo } from "../types";
+import { Sale } from "../types";
 
-function countTotalSold(sales: SalesInfo[]) {
+function countTotalSold(sales: Sale[]) {
   return sales.reduce((total, sale) => {
-    const totalSales = parseFloat(sale.Global_Sales);
+    const totalSales = sale.globalSales;
     if(totalSales) total += totalSales;
   
     return total;

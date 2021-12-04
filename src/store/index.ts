@@ -1,10 +1,10 @@
 import { useReducer, useCallback } from "react";
-import { SalesInfo } from '../types';
+import { Sale } from '../types';
 import clone from '../utils/clone';
 import csvToJson from '../utils/csvToJson';
 
 type AppState = {
-  sales: SalesInfo[]
+  sales: Sale[]
 };
 
 enum ActionType {
@@ -37,7 +37,7 @@ function useStore() {
     loadSales:  useCallback(async () => {
       const response = await fetch('https://raw.githubusercontent.com/diogoribeiro/datasets/main/video-game-sales.csv');
       const csv = await response.text();
-      const sales:SalesInfo[] = csvToJson(csv);
+      const sales:Sale[] = csvToJson(csv);
 
       dispatch({type: ActionType.LOAD_SALES_SUCCESS, payload: { sales } });
     }, []),

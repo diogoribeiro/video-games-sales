@@ -1,9 +1,9 @@
-import { SalesInfo } from '../types';
+import { Sale } from '../types';
 
 // TODO use a more generic type
 type AppState = {
   loading?: boolean,
-  sales: SalesInfo[]
+  sales: Sale[]
 };
 
 function clone(state: AppState) {

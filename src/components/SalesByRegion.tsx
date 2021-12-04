@@ -10,10 +10,10 @@ import { jsx } from '@emotion/react'
 const SalesByRegion: React.FC<SalesSummary>= ({ sales, totalSold }) =>  {
   const totalSoldByRegion = sales
     .reduce((plataforms:PlataformsSales, sale) => {
-      plataforms['EU'] += parseFloat(sale.EU_Sales) || 0;
-      plataforms['North America'] += parseFloat(sale.NA_Sales) || 0;
-      plataforms['Japan'] += parseFloat(sale.JP_Sales) || 0;
-      plataforms['Others'] += parseFloat(sale.Other_Sales) || 0;
+      plataforms['EU'] += sale.euSales || 0;
+      plataforms['North America'] += sale.naSales || 0;
+      plataforms['Japan'] += sale.jpSales || 0;
+      plataforms['Others'] += sale.otherSales || 0;
 
       return plataforms;
     }, {

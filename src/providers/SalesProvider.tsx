@@ -1,9 +1,9 @@
 import { createContext, useContext, Dispatch } from "react";
-import { SalesInfo } from '../types';
+import { Sale } from '../types';
 
 type AppState = {
   loading?: boolean,
-  sales: SalesInfo[]
+  sales: Sale[]
 };
 
 enum ActionType {
