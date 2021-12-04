@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PlatformSalesOverview from './components/PlatformSalesOverview';
-import SalesByPlatform from './components/SalesByPlatform';
+import Sales from './pages/Sales';
 import { SalesProvider } from './providers/SalesProvider';
 import useStore from './store';
 import Layout from './components/Layout';
@@ -24,7 +24,7 @@ const App:React.FC = () => {
     <Router>
       <Layout>
         <SalesProvider value={store}>
-          <Route exact path="/" component={SalesByPlatform} />
+          <Route exact path="/" component={Sales} />
           <Route path="/platform/:platformName" component={PlatformSalesOverview} />
         </SalesProvider>
       </Layout>

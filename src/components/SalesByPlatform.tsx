@@ -2,39 +2,17 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/react'
 import React from 'react';
-import { useHistory } from "react-router-dom";
-import { PlataformsSales } from '../types';
-import { useSalesProvider } from '../providers/SalesProvider';
+import { RouteComponentProps } from 'react-router-dom';
 import PlatformsSalesGraph from './PlatformsSalesGraph';
 
-import countTotalSold from '../utils/countTotalSold';
-import countGenres from '../utils/countUniqueGenres';
-import countSalesByPlatform from '../utils/countSalesByPlatform';
-
-const SalesByPlatform: React.FC = () => {
-  const {state} = useSalesProvider();
-  const sales = state.sales;
-  const history = useHistory();
-
-  const totalSold = countTotalSold(sales);
-  const genres = countGenres(sales);
-  let plataformsSales = countSalesByPlatform(sales, 'globalSales');
-  const totalPlatforms = Object.keys(plataformsSales).length;
-  const totalGenres = Object.keys(genres).length;
-
-  plataformsSales = Object.keys(plataformsSales)
-    .sort((pA, pB) => plataformsSales[pB] - plataformsSales[pA])
-    .slice(0, 10)
-    .reduce((plataforms:PlataformsSales, platform) => {
-      plataforms[platform] = plataformsSales[platform];
-
-      return plataforms;
-    }, {});
-
-  const chartData = Object.keys(plataformsSales)
-    .sort((pA, pB) => plataformsSales[pA] - plataformsSales[pB])
-    .map((platform: string) =>({x: platform, y: plataformsSales[platform]}));
-
+type Props = {
+  chartData: {x:string, y:number}[],
+  history: RouteComponentProps['history'],
+  totalSold:number,
+  totalPlatforms: number,
+  totalGenres: number,
+}
+const SalesByPlatform: React.FC<Props> = ({chartData, history, totalSold, totalPlatforms, totalGenres}) => {
   return (
     <div
       css={{
