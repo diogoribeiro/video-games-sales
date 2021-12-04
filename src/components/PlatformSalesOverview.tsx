@@ -1,27 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useParams  } from "react-router-dom";
-import { useSalesProvider } from '../providers/SalesProvider';
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx } from '@emotion/react'
+import { Sale } from "../types";
+
 import SalesByRegion from './SalesByRegion';
 import GenreSalesSummary from './GenreSalesSummary'
 
-const PlatformSalesOverview: React.FC= () =>  {
-  const { platformName } = useParams<{platformName: string}>();
-  const { state } = useSalesProvider();
-  const sales = state.sales;
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from '@emotion/react'
 
-  const platformSales = sales.filter(sale => sale.platform === platformName)
-
-  const totalSoldByPlatform = platformSales
-    .reduce((total, sale) => {
-      total += sale.globalSales || 0;
-
-      return total;
-    }, 0);
-
+type Props = {
+  totalSoldByPlatform: number,
+  platformName: string,
+  platformSales: Sale[],
+}
+const PlatformSalesOverview: React.FC<Props>= ({ totalSoldByPlatform, platformName, platformSales }) =>  {
   return (
     <div css={{
       display: 'flex',
