@@ -29,8 +29,9 @@ const Sales: React.FC = () => {
     }, {});
 
   const chartData = Object.keys(plataformsSales)
-    .sort((pA, pB) => plataformsSales[pA] - plataformsSales[pB])
-    .map((platform: string) =>({x: platform, y: plataformsSales[platform]}));
+    .sort((pA, pB) => plataformsSales[pB] - plataformsSales[pA])
+    .map((platform: string) =>({x: platform, y: plataformsSales[platform]}))
+    .slice(0,6);
 
   return (
     <SalesByPlatform

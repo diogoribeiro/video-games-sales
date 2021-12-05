@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import PlatformsSalesGraph from './PlatformsSalesGraph';
+import SalesGraph from './SalesGraph';
 import styles from './SalesByPlatform.module.css';
 
 type Props = {
@@ -37,7 +37,7 @@ const SalesByPlatform: React.FC<Props> = ({chartData, history, totalSold, totalP
         </p>
       </div>
       <div className={styles['graph-container']}>
-        <PlatformsSalesGraph data={chartData} onClick={(props) => history.push(`/platform/${props.datum.xName}`)}/>
+        <SalesGraph data={chartData} onClick={(props) => history.push(`/platform/${props.datum.xName}`)}/>
       </div>
     </div>
   );
