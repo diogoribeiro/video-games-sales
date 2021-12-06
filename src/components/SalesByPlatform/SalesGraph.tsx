@@ -4,8 +4,11 @@ import coin from './coins.png';
 
 const Coins:React.FC = () => (
   <defs>
-    <pattern id="img1" x="0" y="0" patternUnits="userSpaceOnUse" width="30" height="30" preserveAspectRatio="xMinYMin">
+    <pattern id="coins" x="0" y="0" patternUnits="userSpaceOnUse" width="30" height="30">
       <image href={coin} x="0" y="0" width="30" height="30" />
+    </pattern>
+    <pattern id="bar" x="0" y="0" width="1" height="1">
+      <rect width="100%" height="100%" fill="url(#coins)"/>
     </pattern>
   </defs>
 )
@@ -23,7 +26,7 @@ const SalesGraph:React.FC<Props> = ({ data, onClick }) => {
         barWidth={30}
         style={{
           data: {
-            fill: 'url(#img1)',
+            fill: 'url(#bar)',
             cursor: 'pointer',
           }
         }}
