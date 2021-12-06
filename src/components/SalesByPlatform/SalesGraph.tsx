@@ -1,5 +1,5 @@
 import React from 'react';
-import { VictoryBar, VictoryBarProps, VictoryChart } from 'victory';
+import { VictoryAxis, VictoryBar, VictoryBarProps, VictoryChart } from 'victory';
 import coin from './coins.png';
 
 const Coins:React.FC = () => (
@@ -17,9 +17,44 @@ interface Props extends VictoryBarProps {
   onClick: (props: any) => any
 }
 
+const axisStyles = {
+  axis: {
+    stroke: '#473f49',
+  },
+  axisLabel: {
+    fill: '#de5752',
+    fontSize: 8,
+    fontStyle: 'italic',
+    padding: 24,
+  },
+  grid: {
+    stroke: '#473f49',
+    opacity: 0.2,
+  },
+  tickLabels: {
+    fontSize: 8,
+    fill: '#473f49'
+  },
+}
+
 const SalesGraph:React.FC<Props> = ({ data, onClick }) => {
   return (
-    <VictoryChart domainPadding={20}>
+    <VictoryChart domainPadding={20} height={250}>
+      <VictoryAxis
+        style={{
+          ...axisStyles,
+          axisLabel: {
+            ...axisStyles.axisLabel,
+            padding: 36,
+          }
+        }}
+        label="# of sales  (in millions of units)"
+        dependentAxis
+      />
+      <VictoryAxis
+        style={axisStyles}
+        label="Platform"
+      />
       <Coins />
       <VictoryBar
         data={data}
