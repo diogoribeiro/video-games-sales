@@ -5,14 +5,16 @@ import { Sale } from "../../types";
 import SalesByRegion from './SalesByRegion';
 import GenreSalesSummary from './GenreSalesSummary';
 import styles from './PlatformSalesOverview.module.css';
+import { RegionsSales } from '../../types';
 
 type Props = {
   totalSoldByPlatform: number,
   platformName: string,
   platformSales: Sale[],
+  totalSoldByRegion: RegionsSales,
 }
 
-const PlatformSalesOverview: React.FC<Props>= ({ totalSoldByPlatform, platformName, platformSales }) =>  {
+const PlatformSalesOverview: React.FC<Props>= ({ totalSoldByPlatform, platformName, platformSales, totalSoldByRegion }) =>  {
   return (
     <div className={styles.container}>
       <div className={styles['header-container']}>
@@ -28,14 +30,14 @@ const PlatformSalesOverview: React.FC<Props>= ({ totalSoldByPlatform, platformNa
       </div>
       <div className={styles.copy}>
         <p>
-          {platformName} sold {Math.floor(totalSoldByPlatform)} video games across the globe since {Math.min(...platformSales.map(sale => sale.releaseYear || new Date().getFullYear()))}
+          {platformName} sold {Math.floor(totalSoldByPlatform)}MM video games across the globe since {Math.min(...platformSales.map(sale => sale.releaseYear || new Date().getFullYear()))}
         </p>
         <p>
           Here is how it was distributed by region and genre.
         </p>
       </div>
       <div className={styles['graphs-container']}>
-        <SalesByRegion sales={platformSales} totalSold={totalSoldByPlatform} />
+        <SalesByRegion totalSoldByRegion={totalSoldByRegion} totalSold={totalSoldByPlatform} />
         <div className={styles['genre-graph-container']}>
           <GenreSalesSummary sales={platformSales} totalSold={totalSoldByPlatform} />
         </div>

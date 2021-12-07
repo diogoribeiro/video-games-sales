@@ -1,51 +1,33 @@
 import React from "react";
-import { SalesSummary, PlataformsSales } from '../../types';
-import PercentageGraph from "./PercentageGraph";
-import findMostSalesRegion from "../../utils/findMostSalesRegion";
+import { RegionsSales } from '../../types';
+import { VictoryPie } from "victory";
+import percentage from "../../utils/percentage";
 import styles from './SalesByRegion.module.css';
 
-const SalesByRegion: React.FC<SalesSummary>= ({ sales, totalSold }) =>  {
-  const totalSoldByRegion = sales
-    .reduce((plataforms:PlataformsSales, sale) => {
-      plataforms['EU'] += sale.euSales || 0;
-      plataforms['North America'] += sale.naSales || 0;
-      plataforms['Japan'] += sale.jpSales || 0;
-      plataforms['Others'] += sale.otherSales || 0;
+function getLabel(region:string, regionTotal:number, totalSold:number) {
+  return `${region} \n ${percentage(regionTotal,totalSold).toFixed(2)}%`
+}
 
-      return plataforms;
-    }, {
-      'EU': 0,
-      'North America': 0,
-      'Japan': 0,
-      'Others': 0,
-    });
+type Props = {
+  totalSold: number,
+  totalSoldByRegion: RegionsSales,
+}
 
-  const mostSaleRegionInfo = findMostSalesRegion(totalSoldByRegion, totalSold);
-
-  const regionsSummary = Object.keys(totalSoldByRegion)
-    .filter(region => (region !== mostSaleRegionInfo.region))
-    .map(region => (
-      <div key={region}>
-        <span className={styles['region-name']}>
-          {region}:
-        </span>
-        <span className={styles['region-total']}>
-          { ((totalSoldByRegion[region]/totalSold) * 100).toFixed(2) }%
-        </span>
-      </div>
-    ));
-
+const SalesByRegion: React.FC<Props>= ({ totalSoldByRegion, totalSold }) =>  {
   return (
     <div className={styles.container}>
-      <PercentageGraph
-        color="#FAA85D"
-        percentageInfo={{
-          label: `${mostSaleRegionInfo.percentage.toFixed(2)}%\n sales in ${mostSaleRegionInfo.region}`,
-          percentage: mostSaleRegionInfo.percentage,
-          total: mostSaleRegionInfo.totalSold,
+      <VictoryPie
+        colorScale={["#F58067", "#FAA85D", "#473f49", '#de5752' ]}
+        data={[
+          {x: 1, y: totalSoldByRegion.eu, label: getLabel('EU', totalSoldByRegion.eu,totalSold)},
+          {x: 1, y: totalSoldByRegion.northAmerica, label: getLabel('North America', totalSoldByRegion.northAmerica, totalSold)},
+          {x: 1, y: totalSoldByRegion.japan, label: getLabel('Japan', totalSoldByRegion.japan, totalSold)},
+          {x: 1, y: totalSoldByRegion.others, label: getLabel('Others', totalSoldByRegion.others, totalSold)},
+        ]}
+        style={{
+          labels: { fontSize: 12 }
         }}
       />
-      {regionsSummary}
     </div>
   );
 }

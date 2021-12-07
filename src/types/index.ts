@@ -29,6 +29,13 @@ export type GenresSales = {
   [key:string]: number
 }
 
+export type RegionsSales = {
+  eu: number
+  northAmerica: number
+  japan: number
+  others: number
+}
+
 export type SalesSummary = {
   sales: Sale[],
   totalSold: number,

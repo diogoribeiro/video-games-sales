@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import ReactSlider from 'react-slider';
-import SalesGraph from './SalesGraph';
+import SalesGraph from './PlatformSalesGraph';
 import { Period } from '../../types';
 import styles from './SalesByPlatform.module.css';
 

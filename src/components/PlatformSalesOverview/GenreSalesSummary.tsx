@@ -1,34 +1,20 @@
 import React from "react";
 import { SalesSummary } from '../../types';
-import PercentageGraph from './PercentageGraph';
 import countSalesByGenere from "../../utils/countSalesByGenre";
-import styles from './GenreSalesSummary.module.css';
+import SalesGraph from "../SalesGraph";
 
-const GenreSalesSummary: React.FC<SalesSummary>= ({ sales, totalSold }) =>  {
-  const colors = ["#F58067", "#FA5D97", "#473f49"];
+const GenreSalesSummary: React.FC<SalesSummary>= ({ sales }) =>  {
   const genresSalesInfo = countSalesByGenere(sales);
 
   return (
-    <>
-      {Object.keys(genresSalesInfo).slice(0, 3).map((genre, index) => {
-        const percentage = (genresSalesInfo[genre]/totalSold) * 100
-        return (
-          <div
-            key={genre}
-            className={styles.container}
-          >
-            <PercentageGraph
-              color={colors[index]}
-              percentageInfo={{
-                label: `${percentage.toFixed(2)}%\n ${genre}`,
-                percentage: percentage,
-                total: totalSold,
-              }}
-            />
-          </div>
-        );
+    <SalesGraph
+      data={Object.keys(genresSalesInfo).slice(0, 5).map((genre) => {
+        return { x: genre, y: genresSalesInfo[genre] }
       })}
-    </>
+      labelX="Genre"
+      labelY="# of sales per genre (in millions of units)"
+      onClick={() => {}}
+    />
   );
 }
 
