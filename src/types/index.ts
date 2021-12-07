@@ -33,3 +33,8 @@ export type SalesSummary = {
   sales: Sale[],
   totalSold: number,
 }
+
+export type Period = {
+  begin: number,
+  end: number,
+}

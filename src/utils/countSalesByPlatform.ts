@@ -1,7 +1,8 @@
-import { PlataformsSales, Sale } from "../types";
+import { PlataformsSales, Sale, Period } from "../types";
 
-function countSales (sales: Sale[], salesField: 'naSales'|'euSales'|'jpSales'|'otherSales'|'globalSales') {
+function countSales (sales: Sale[], period:Period, salesField: 'naSales'|'euSales'|'jpSales'|'otherSales'|'globalSales') {
   return sales
+    .filter(sale => sale.releaseYear >= period.begin && sale.releaseYear <= period.end)
     .reduce((plataforms:PlataformsSales, sale) => {
       if (!plataforms[sale.platform]) plataforms[sale.platform] = 0;
       const totalSales:number = sale[salesField];

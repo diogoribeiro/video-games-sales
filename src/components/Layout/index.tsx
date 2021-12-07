@@ -11,7 +11,6 @@ const Layout:React.FC = ({ children }) => (
         <h1>
           Video games sales
         </h1>
-        <span>Since 1980</span>
       </Link>
     </header>
     <main className={styles['body-container']}>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { VictoryAxis, VictoryBar, VictoryBarProps, VictoryChart } from 'victory';
+import { VictoryAxis, VictoryBar, VictoryBarProps, VictoryChart, VictoryLabel } from 'victory';
+import { Period } from '../../types';
 import coin from './coins.png';
 
 const Coins:React.FC = () => (
@@ -14,7 +15,8 @@ const Coins:React.FC = () => (
 )
 
 interface Props extends VictoryBarProps {
-  onClick: (props: any) => any
+  onClick: (props: any) => any,
+  period: Period,
 }
 
 const axisStyles = {
@@ -37,9 +39,16 @@ const axisStyles = {
   },
 }
 
-const SalesGraph:React.FC<Props> = ({ data, onClick }) => {
+const SalesGraph:React.FC<Props> = ({ data, onClick, period }) => {
   return (
     <VictoryChart domainPadding={20} height={250}>
+      <VictoryLabel
+        text={`Sales for games released between ${period.begin} and ${period.end}`}
+        x={225}
+        y={25}
+        textAnchor="middle"
+        style={{ fill: '#473f49', fontSize: 10 }}
+      />
       <VictoryAxis
         style={{
           ...axisStyles,
@@ -48,7 +57,7 @@ const SalesGraph:React.FC<Props> = ({ data, onClick }) => {
             padding: 36,
           }
         }}
-        label="# of sales  (in millions of units)"
+        label="# of sales per platform (in millions of units)"
         dependentAxis
       />
       <VictoryAxis
