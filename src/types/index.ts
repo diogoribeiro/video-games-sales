@@ -1,3 +1,8 @@
+export type AppState = {
+  sales: Sale[],
+  salesPeriod: Period | null,
+}
+
 export type Sale = {
   platform: string,
   releaseYear: number,

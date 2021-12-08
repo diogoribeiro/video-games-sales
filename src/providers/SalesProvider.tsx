@@ -1,10 +1,5 @@
 import { createContext, useContext, Dispatch } from "react";
-import { Sale } from '../types';
-
-type AppState = {
-  loading?: boolean,
-  sales: Sale[]
-};
+import { AppState, Period } from '../types';
 
 enum ActionType {
   LOAD_SALES,
@@ -13,10 +8,28 @@ enum ActionType {
 
 type Action = {
   type: ActionType | undefined,
-  payload: Required<AppState>,
+  payload: AppState,
 }
 
-const Context = createContext<{state: AppState, dispatch: Dispatch<Action>, actions: {[key: string]: () => {}}}>({ state: { sales: [] }, dispatch: () => {}, actions: {} });
+type ContextType = {
+  state: AppState,
+  dispatch: Dispatch<Action>,
+  actions: {
+    loadSales: () => Promise<void>,
+    selectPeriod: (period: Period) => void,
+  }
+}
+
+const Context = createContext<ContextType>({
+  state: { sales: [], salesPeriod: null },
+  dispatch: () => {},
+  actions: {
+    loadSales: () => Promise.reject('Invalid load sales action'),
+    selectPeriod: () => {
+      throw new Error('Invalid select period action')
+    },
+  },
+});
 const Provider = Context.Provider;
 
 

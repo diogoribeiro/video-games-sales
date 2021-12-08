@@ -9,9 +9,6 @@ type Props = {
   chartData: {x:string, y:number}[],
   history: RouteComponentProps['history'],
   onChangePeriod: (newPeriod:number[]) => void,
-  totalSold:number,
-  totalPlatforms: number,
-  totalGenres: number,
   period: Period,
   selectedPeriod: Period,
 }

@@ -1,10 +1,4 @@
-import { Sale } from '../types';
-
-// TODO use a more generic type
-type AppState = {
-  loading?: boolean,
-  sales: Sale[]
-};
+import { AppState } from '../types';
 
 function clone(state: AppState) {
   return JSON.parse(JSON.stringify(state))

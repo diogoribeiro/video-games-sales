@@ -1,20 +1,17 @@
 import { useReducer, useCallback } from "react";
-import { Sale } from '../types';
+import { AppState, Sale, Period } from '../types';
 import clone from '../utils/clone';
 import csvToJson from '../utils/csvToJson';
-
-type AppState = {
-  sales: Sale[]
-};
 
 enum ActionType {
   LOAD_SALES,
   LOAD_SALES_SUCCESS,
+  SELECT_PERIOD,
 }
 
 type Action = {
   type: ActionType | undefined,
-  payload: Required<AppState>,
+  payload: Partial<AppState>,
 }
 
 function reducer(state: AppState, action: Action) {
@@ -25,13 +22,16 @@ function reducer(state: AppState, action: Action) {
       nextState.sales = action.payload.sales;
       nextState.loading = false;
       return nextState;
+    case ActionType.SELECT_PERIOD:
+      nextState.salesPeriod = action.payload.salesPeriod;
+      return nextState;
     default:
       return state;
   }
 }
 
 function useStore() {
-  const [state, dispatch] = useReducer(reducer, { sales: [] });
+  const [state, dispatch] = useReducer(reducer, { sales: [], salesPeriod: null });
 
   const actions = {
     loadSales:  useCallback(async () => {
@@ -41,6 +41,9 @@ function useStore() {
 
       dispatch({type: ActionType.LOAD_SALES_SUCCESS, payload: { sales } });
     }, []),
+    selectPeriod: function (period: Period) {
+      dispatch({type: ActionType.SELECT_PERIOD, payload: { salesPeriod: period } })
+    },
   };
 
   return {
