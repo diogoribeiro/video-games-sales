@@ -1,0 +1,103 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 100%;
+}
+
+.header {
+  background: #473f49;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+  width: 100%;
+}
+
+.header-section {
+  width: 33%;
+}
+
+.body-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.copy {
+  font-size: 12px;
+  text-align: center;
+  margin: 0;
+}
+
+.slider-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.graph-container {
+  width: 60%;
+}
+
+.horizontal-slider {
+  width: 80%;
+  max-width: 500px;
+  height: 50px;
+}
+
+.thumb {
+  font-size: 12px;
+  text-align: center;
+  background-color: #de5752;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.track {
+  position: relative;
+  background: #473f49;
+}
+
+.mark {
+  width: 8px;
+  height: 8px;
+  border: 2px solid #473f49;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.horizontal-slider .track {
+  top: 20px;
+  height: 10px;
+}
+
+.horizontal-slider .thumb {
+  top: 1px;
+  width: 50px;
+  height: 48px;
+  line-height: 45px;
+}
+
+.horizontal-slider .mark {
+  margin: 0 calc(25px - 6px);
+  bottom: calc(50% - 6px);
+}
+
+@media (max-width: 809px) {
+  .header {
+    font-size: 20px;
+  }
+
+  .graph-container {
+    width: 80%
+  }
+}

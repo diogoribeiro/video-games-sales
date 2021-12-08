@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import ReactSlider from 'react-slider';
+import Slider from '../Slider';
 import SalesGraph from './PlatformSalesGraph';
 import { Period } from '../../types';
 import styles from './SalesByPlatform.module.css';
@@ -15,22 +15,14 @@ type Props = {
   period: Period,
   selectedPeriod: Period,
 }
-const SalesByPlatform: React.FC<Props> = ({chartData, history, onChangePeriod, totalSold, totalPlatforms, totalGenres, period, selectedPeriod}) => {
+const SalesByPlatform: React.FC<Props> = ({chartData, history, onChangePeriod, period, selectedPeriod}) => {
   return (
     <div className={styles.container}>
       <div className={styles['slider-container']}>
-        <ReactSlider
-          className={styles['horizontal-slider']}
-          defaultValue={[period.begin, period.end]}
-          min={period.begin}
-          max={period.end}
-          markClassName={styles['mark']}
-          step={5}
+        <Slider
           onChange={onChangePeriod}
-          value={[selectedPeriod.begin, selectedPeriod.end]}
-          thumbClassName={styles['thumb']}
-          trackClassName={styles['track']}
-          renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+          period={period}
+          selectedPeriod={selectedPeriod}
         />
       </div>
       <div className={styles['graph-container']}>
