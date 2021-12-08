@@ -42,7 +42,7 @@ const axisStyles = {
 }
 
 const tooltipStyles = {
-  fill: 'transparent',
+  fill: '#FFFFFF',
   stroke: "#473f49",
   strokeWidth: 1,
 }
