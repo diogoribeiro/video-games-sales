@@ -1,5 +1,7 @@
 import React from 'react';
 import { VictoryAxis, VictoryBar, VictoryBarProps, VictoryChart, VictoryTooltip } from 'victory';
+import { VictoryBarTTargetType } from 'victory-bar';
+import { EventPropTypeInterface } from 'victory-core';
 import coin from './coins.png';
 
 const Coins:React.FC = () => (
@@ -14,7 +16,7 @@ const Coins:React.FC = () => (
 )
 
 interface Props extends VictoryBarProps {
-  onClick: (props: any) => any,
+  onClick?: (props: any) => any,
   labelX: string,
   labelY: string,
 }
@@ -46,6 +48,21 @@ const tooltipStyles = {
 }
 
 const SalesGraph:React.FC<Props> = ({ data, onClick, labelX, labelY, children }) => {
+  const events:EventPropTypeInterface< VictoryBarTTargetType, number | string | number[] | string[]>[] = [];
+  const isOnClickEnabled = !!onClick;
+
+  if (isOnClickEnabled) {
+    events.push({
+      target: "data",
+      eventHandlers: {
+        onClick: () => ({
+          target: 'data',
+          mutation: onClick,
+        }),
+      }
+    });
+  }
+
   return (
     <VictoryChart domainPadding={20} height={250}>
       {children}
@@ -73,20 +90,10 @@ const SalesGraph:React.FC<Props> = ({ data, onClick, labelX, labelY, children })
         style={{
           data: {
             fill: 'url(#bar)',
-            cursor: 'pointer',
+            cursor: isOnClickEnabled ? 'pointer' : '',
           }
         }}
-        events={[
-          {
-            target: "data",
-            eventHandlers: {
-              onClick: () => ({
-                target: 'data',
-                mutation: onClick,
-              }),
-            }
-          },
-        ]}
+        events={events}
       />
     </VictoryChart>
   )

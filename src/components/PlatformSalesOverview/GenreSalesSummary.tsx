@@ -13,7 +13,6 @@ const GenreSalesSummary: React.FC<SalesSummary>= ({ sales }) =>  {
       })}
       labelX="Genre"
       labelY="# of sales per genre (in millions of units)"
-      onClick={() => {}}
     />
   );
 }
