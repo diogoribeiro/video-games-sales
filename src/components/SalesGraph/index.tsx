@@ -1,5 +1,5 @@
 import React from 'react';
-import { VictoryAxis, VictoryBar, VictoryBarProps, VictoryChart } from 'victory';
+import { VictoryAxis, VictoryBar, VictoryBarProps, VictoryChart, VictoryTooltip } from 'victory';
 import coin from './coins.png';
 
 const Coins:React.FC = () => (
@@ -39,6 +39,12 @@ const axisStyles = {
   },
 }
 
+const tooltipStyles = {
+  fill: 'transparent',
+  stroke: "#473f49",
+  strokeWidth: 1,
+}
+
 const SalesGraph:React.FC<Props> = ({ data, onClick, labelX, labelY, children }) => {
   return (
     <VictoryChart domainPadding={20} height={250}>
@@ -62,6 +68,8 @@ const SalesGraph:React.FC<Props> = ({ data, onClick, labelX, labelY, children })
       <VictoryBar
         data={data}
         barWidth={30}
+        labels={({ datum }) => `${datum.y.toFixed(2)}MM`}
+        labelComponent={<VictoryTooltip flyoutPadding={4} flyoutStyle={tooltipStyles} style={{ fontSize: 8 }} />}
         style={{
           data: {
             fill: 'url(#bar)',
