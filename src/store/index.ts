@@ -1,5 +1,5 @@
 import { useReducer, useCallback } from "react";
-import { AppState, Sale, Period } from '../types';
+import { AppState, Sale } from '../types';
 import clone from '../utils/clone';
 import csvToJson from '../utils/csvToJson';
 
@@ -41,8 +41,8 @@ function useStore() {
 
       dispatch({type: ActionType.LOAD_SALES_SUCCESS, payload: { sales } });
     }, []),
-    selectPeriod: function (period: Period) {
-      dispatch({type: ActionType.SELECT_PERIOD, payload: { salesPeriod: period } })
+    selectPeriod: function (period:number[]) {
+      dispatch({type: ActionType.SELECT_PERIOD, payload: { salesPeriod: { begin: period[0], end: period[1]} } })
     },
   };
 

@@ -3,12 +3,22 @@ import { useParams  } from "react-router-dom";
 import { useSalesProvider } from '../providers/SalesProvider';
 import PlatformSalesOverview from '../components/PlatformSalesOverview';
 import { RegionsSales } from '../types';
+import uniqueSalesYears from '../utils/uniqueSalesYears';
 
 const Platform: React.FC= () =>  {
   const { platformName } = useParams<{platformName: string}>();
-  const { state: { sales } } = useSalesProvider();
+  const {
+    state: { sales, salesPeriod },
+    actions: { selectPeriod },
+  } = useSalesProvider();
+  const years = uniqueSalesYears(sales);
+  const wholePeriod = {begin: years[0], end: years[years.length - 1]};
+  const period = salesPeriod || wholePeriod;
 
-  const platformSales = sales.filter(sale => sale.platform === platformName)
+  const platformSales = sales.filter(sale => sale.platform === platformName &&
+    sale.releaseYear >= period.begin &&
+    sale.releaseYear <= period.end
+  )
 
   const totalSoldByPlatform = platformSales
     .reduce((total, sale) => {
@@ -38,6 +48,9 @@ const Platform: React.FC= () =>  {
       platformSales={platformSales}
       totalSoldByPlatform={totalSoldByPlatform}
       totalSoldByRegion={totalSoldByRegion}
+      onChangePeriod={selectPeriod}
+      period={wholePeriod}
+      selectedPeriod={period}
     />
   );
 }

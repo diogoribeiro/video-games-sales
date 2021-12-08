@@ -1,5 +1,5 @@
 import { createContext, useContext, Dispatch } from "react";
-import { AppState, Period } from '../types';
+import { AppState } from '../types';
 
 enum ActionType {
   LOAD_SALES,
@@ -16,7 +16,7 @@ type ContextType = {
   dispatch: Dispatch<Action>,
   actions: {
     loadSales: () => Promise<void>,
-    selectPeriod: (period: Period) => void,
+    selectPeriod: (period: number[]) => void,
   }
 }
 
