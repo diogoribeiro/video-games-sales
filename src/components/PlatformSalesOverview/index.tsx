@@ -7,15 +7,27 @@ import { RegionsSales } from '../../types';
 import Slider from '../Slider';
 import styles from './PlatformSalesOverview.module.css';
 
-type Props = {
+type PropsGraphs = {
   totalSoldByPlatform: number,
-  platformName: string,
   platformSales: Sale[],
   totalSoldByRegion: RegionsSales,
+}
+
+type Props = PropsGraphs & {
+  platformName: string,
   onChangePeriod: (newPeriod:number[]) => void,
   period: Period,
   selectedPeriod: Period,
 }
+
+const Graphs:React.FC<PropsGraphs> = ({totalSoldByRegion, totalSoldByPlatform, platformSales}) => (
+  <>
+    <SalesByRegion totalSoldByRegion={totalSoldByRegion} totalSold={totalSoldByPlatform} />
+    <div className={styles['genre-graph-container']}>
+      <GenreSalesSummary sales={platformSales} totalSold={totalSoldByPlatform} />
+    </div>
+  </>
+)
 
 const PlatformSalesOverview: React.FC<Props>= ({
   totalSoldByPlatform, platformName, platformSales, totalSoldByRegion,
@@ -50,10 +62,8 @@ const PlatformSalesOverview: React.FC<Props>= ({
         />
       </div>
       <div className={styles['graphs-container']}>
-        <SalesByRegion totalSoldByRegion={totalSoldByRegion} totalSold={totalSoldByPlatform} />
-        <div className={styles['genre-graph-container']}>
-          <GenreSalesSummary sales={platformSales} totalSold={totalSoldByPlatform} />
-        </div>
+        {totalSoldByPlatform > 0 && <Graphs totalSoldByRegion={totalSoldByRegion} totalSoldByPlatform={totalSoldByPlatform} platformSales={platformSales} />}
+        {totalSoldByPlatform === 0 && <div>No sales on the selected period</div>}
       </div>
     </div>
   );
