@@ -5,12 +5,14 @@ import SalesGraph from "../SalesGraph";
 
 const GenreSalesSummary: React.FC<SalesSummary>= ({ sales }) =>  {
   const genresSalesInfo = countSalesByGenere(sales);
+  const mostSoldGenres = Object.keys(genresSalesInfo).slice(0, 5);
+  const graphData = mostSoldGenres.map((genre) => {
+    return { x: genre, y: genresSalesInfo[genre] }
+  });
 
   return (
     <SalesGraph
-      data={Object.keys(genresSalesInfo).slice(0, 5).map((genre) => {
-        return { x: genre, y: genresSalesInfo[genre] }
-      })}
+      data={graphData}
       labelX="Genre"
       labelY="# of sales per genre (in millions of units)"
     />
