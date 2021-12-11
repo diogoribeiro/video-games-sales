@@ -1,11 +1,17 @@
 import React from 'react';
 import { VictoryBarProps, VictoryLabel } from 'victory';
 import { Period } from '../../types';
+import { purple800 } from '../../utils/theme';
 import SalesGraph from '../SalesGraph';
 
 interface Props extends VictoryBarProps {
   onClick: (props: any) => any,
   period: Period,
+}
+
+const labelStyles = {
+  fill: purple800,
+  fontSize: 10,
 }
 
 const PlatformSalesGraph:React.FC<Props> = ({ data, onClick, period }) => {
@@ -21,7 +27,7 @@ const PlatformSalesGraph:React.FC<Props> = ({ data, onClick, period }) => {
       x={225}
       y={25}
       textAnchor="middle"
-      style={{ fill: '#473f49', fontSize: 10 }}
+      style={labelStyles}
     />
     </SalesGraph>
   )
