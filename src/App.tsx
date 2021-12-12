@@ -18,7 +18,9 @@ const App:React.FC = () => {
     loadSales();
   }, [loadSales]);
 
-  if (!sales.length) return <div>Loading...</div>
+  if (!sales.length) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Router>

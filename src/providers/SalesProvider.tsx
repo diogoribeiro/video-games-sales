@@ -36,7 +36,9 @@ const Provider = Context.Provider;
 function useSalesProvider() {
   const context = useContext(Context);
 
-  if(!context) throw new Error('The component cannot be rendered outside the SalesProvider');
+  if(!context) {
+    throw new Error('The component cannot be rendered outside the SalesProvider');
+  }
 
   return context;
 }
