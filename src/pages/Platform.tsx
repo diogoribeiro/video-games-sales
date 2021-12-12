@@ -1,16 +1,13 @@
 import React from 'react';
-import { useParams  } from "react-router-dom";
-import { useSalesProvider } from '../providers/SalesProvider';
 import PlatformSalesOverview from '../components/PlatformSalesOverview';
-import { countTotalSalesByRegion, getPlatformSalesByPeriod } from '../utils/sales';
+import { countTotalSalesByRegion } from '../utils/sales';
 import countTotalSold from '../utils/countTotalSold';
 import useSlider from '../hooks/useSlider';
+import usePlatformSales from '../hooks/usePlatformSales';
 
 const Platform: React.FC= () =>  {
-  const { platformName } = useParams<{platformName: string}>();
-  const { state: { sales } } = useSalesProvider();
   const { wholePeriod, period, selectPeriod } = useSlider();
-  const platformSales = getPlatformSalesByPeriod(sales, platformName, period);
+  const { platformSales, platformName } = usePlatformSales(period);
   const totalSoldByPlatform = countTotalSold(platformSales);
   const totalSoldByRegion = countTotalSalesByRegion(platformSales);
 
