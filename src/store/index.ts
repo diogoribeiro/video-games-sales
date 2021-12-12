@@ -1,6 +1,6 @@
 import { useReducer, useCallback } from "react";
 import { AppState, Sale } from '../types';
-import clone from '../utils/clone';
+import { clone } from '../utils/appState';
 import csvToJson from '../utils/csvToJson';
 
 enum ActionType {
