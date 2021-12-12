@@ -2,6 +2,7 @@ import React from 'react';
 import { VictoryAxis, VictoryBar, VictoryBarProps, VictoryChart, VictoryTooltip } from 'victory';
 import { VictoryBarTTargetType } from 'victory-bar';
 import { EventPropTypeInterface } from 'victory-core';
+import { orange800, purple800, white } from '../../utils/theme';
 import coin from './coins.png';
 
 const Coins:React.FC = () => (
@@ -23,21 +24,21 @@ interface Props extends VictoryBarProps {
 
 const axisStyles = {
   axis: {
-    stroke: '#473f49',
+    stroke: purple800,
   },
   axisLabel: {
-    fill: '#de5752',
+    fill: orange800,
     fontSize: 8,
     fontStyle: 'italic',
     padding: 24,
   },
   grid: {
-    stroke: '#473f49',
+    stroke: purple800,
     opacity: 0.2,
   },
   tickLabels: {
     fontSize: 8,
-    fill: '#473f49'
+    fill: purple800
   },
 }
 
@@ -50,8 +51,8 @@ const axisXStyles = {
 }
 
 const tooltipStyles = {
-  fill: '#FFFFFF',
-  stroke: "#473f49",
+  fill: white,
+  stroke: purple800,
   strokeWidth: 1,
 }
 

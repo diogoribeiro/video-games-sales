@@ -1,3 +1,4 @@
+export const white = '#FFFFFF';
 export const orange500 = '#F58067';
 export const orange800 = '#DE5752';
 export const yellow500 = '#FAA85D';
