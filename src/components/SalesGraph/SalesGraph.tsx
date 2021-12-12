@@ -50,10 +50,14 @@ const axisXStyles = {
   }
 }
 
-const tooltipStyles = {
+const tooltipFlyoutStyles = {
   fill: white,
   stroke: purple800,
   strokeWidth: 1,
+}
+
+const tooltipStyles = {
+  fontSize: 8,
 }
 
 function barStyles(isOnClickEnabled: boolean) {
@@ -98,7 +102,7 @@ const SalesGraph:React.FC<Props> = ({ data, onClick, labelX, labelY, children })
         data={data}
         barWidth={30}
         labels={({ datum }) => `${datum.y.toFixed(2)}MM`}
-        labelComponent={<VictoryTooltip flyoutPadding={4} flyoutStyle={tooltipStyles} style={{ fontSize: 8 }} />}
+        labelComponent={<VictoryTooltip flyoutPadding={4} flyoutStyle={tooltipFlyoutStyles} style={tooltipStyles} />}
         style={barStyles(isOnClickEnabled)}
         events={events}
       />
