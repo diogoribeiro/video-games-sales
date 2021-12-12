@@ -1,7 +1,7 @@
 import React from 'react';
 import PlatformSalesOverview from '../components/PlatformSalesOverview';
 import { countTotalSalesByRegion } from '../utils/sales';
-import countTotalSold from '../utils/countTotalSold';
+import { countTotalSold } from '../utils/sales';
 import useSlider from '../hooks/useSlider';
 import usePlatformSales from '../hooks/usePlatformSales';
 

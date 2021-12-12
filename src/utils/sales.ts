@@ -46,3 +46,12 @@ export const countSalesByGenere = memoize(function countSalesByGenere(sales: Sal
     return plataforms;
   }, {});
 });
+
+export const countTotalSold = memoize(function countTotalSold(sales: Sale[]) {
+  return sales.reduce((total, sale) => {
+    const totalSales = sale.globalSales;
+    if(totalSales) total += totalSales;
+
+    return total;
+  }, 0);
+});
