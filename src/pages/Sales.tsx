@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useSalesProvider } from '../providers/SalesProvider';
 import SalesByPlatform from '../components/SalesByPlatform';
 
-import countSalesByPlatform from '../utils/countSalesByPlatform';
+import { countSalesByPlatform } from '../utils/sales';
 import { PlataformsSales } from '../types';
 import useSlider from '../hooks/useSlider';
 
