@@ -50,3 +50,5 @@ export type Period = {
   begin: number,
   end: number,
 }
+
+export type SalesRegion = 'naSales'|'euSales'|'jpSales'|'otherSales'|'globalSales';
