@@ -1,6 +1,6 @@
 import { GenresSales, Period, PlataformsSales, RegionsSales, Sale, SalesRegion } from "../types";
 import memoize from 'lodash.memoize';
-import unique from "./unique";
+import { unique } from "./array";
 
 export const getPlatformSalesByPeriod = memoize(function getPlatformSalesByPeriod(sales: Sale[], platformName: string, period: Period) {
   return sales.filter(sale => sale.platform === platformName &&
