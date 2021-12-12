@@ -1,4 +1,5 @@
 import { Sale } from "../types";
+import memoize from 'lodash.memoize';
 
 function countTotalSold(sales: Sale[]) {
   return sales.reduce((total, sale) => {
@@ -9,4 +10,4 @@ function countTotalSold(sales: Sale[]) {
   }, 0);
 }
 
-export default countTotalSold;
+export default memoize(countTotalSold);

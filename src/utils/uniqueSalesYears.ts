@@ -1,5 +1,6 @@
 import { Sale } from "../types";
 import unique from "./unique";
+import memoize from 'lodash.memoize';
 
 function uniqueSalesYears(sales: Sale[]) {
   return unique(
@@ -8,4 +9,4 @@ function uniqueSalesYears(sales: Sale[]) {
   ).sort();
 }
 
-export default uniqueSalesYears;
+export default memoize(uniqueSalesYears);

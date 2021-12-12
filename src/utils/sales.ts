@@ -1,13 +1,14 @@
 import { Period, RegionsSales, Sale } from "../types";
+import memoize from 'lodash.memoize';
 
-export function getPlatformSalesByPeriod(sales: Sale[], platformName: string, period: Period) {
+export const getPlatformSalesByPeriod = memoize(function getPlatformSalesByPeriod(sales: Sale[], platformName: string, period: Period) {
   return sales.filter(sale => sale.platform === platformName &&
     sale.releaseYear >= period.begin &&
     sale.releaseYear <= period.end
   );
-}
+});
 
-export function countTotalSalesByRegion(sales: Sale[]) {
+export const countTotalSalesByRegion = memoize(function countTotalSalesByRegion(sales: Sale[]) {
   return sales
     .reduce((plataforms: RegionsSales, sale) => {
       plataforms.eu += sale.euSales || 0;
@@ -22,4 +23,4 @@ export function countTotalSalesByRegion(sales: Sale[]) {
       japan: 0,
       others: 0,
     });
-}
+})

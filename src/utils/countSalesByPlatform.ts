@@ -1,4 +1,5 @@
 import { PlataformsSales, Sale, Period } from "../types";
+import memoize from 'lodash.memoize';
 
 function countSales (sales: Sale[], period:Period, salesField: 'naSales'|'euSales'|'jpSales'|'otherSales'|'globalSales') {
   return sales
@@ -12,4 +13,4 @@ function countSales (sales: Sale[], period:Period, salesField: 'naSales'|'euSale
     }, {});
 }
 
-export default countSales;
+export default memoize(countSales);

@@ -1,4 +1,5 @@
 import { GenresSales, Sale } from "../types";
+import memoize from 'lodash.memoize';
 
 function countUniqueGenres(sales: Sale[]) {
   return sales.reduce((genres:GenresSales, sale) => {
@@ -8,4 +9,4 @@ function countUniqueGenres(sales: Sale[]) {
   }, {});
 };
 
-export default countUniqueGenres;
+export default memoize(countUniqueGenres);

@@ -1,6 +1,7 @@
 import { PlataformsSales } from "../types";
+import memoize from 'lodash.memoize';
 
-export default function findMostSalesRegion(totalSoldByRegion: PlataformsSales, totalSoldByAllRegions: number) {
+function findMostSalesRegion(totalSoldByRegion: PlataformsSales, totalSoldByAllRegions: number) {
   return Object.keys(totalSoldByRegion).reduce((mostSalesRegion, currentRegion) => {
     if (totalSoldByRegion[currentRegion] > mostSalesRegion?.totalSold) {
       const totalSold = totalSoldByRegion[currentRegion];
@@ -19,3 +20,5 @@ export default function findMostSalesRegion(totalSoldByRegion: PlataformsSales, 
     percentage: 0,
   });
 }
+
+export default memoize(findMostSalesRegion);
