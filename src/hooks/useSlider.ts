@@ -1,5 +1,5 @@
 import { useSalesProvider } from '../providers/SalesProvider';
-import uniqueSalesYears from "../utils/uniqueSalesYears";
+import { uniqueSalesYears } from "../utils/sales";
 
 function useSlider() {
   const {

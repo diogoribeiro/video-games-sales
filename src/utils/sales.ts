@@ -1,5 +1,6 @@
 import { GenresSales, Period, PlataformsSales, RegionsSales, Sale, SalesRegion } from "../types";
 import memoize from 'lodash.memoize';
+import unique from "./unique";
 
 export const getPlatformSalesByPeriod = memoize(function getPlatformSalesByPeriod(sales: Sale[], platformName: string, period: Period) {
   return sales.filter(sale => sale.platform === platformName &&
@@ -54,4 +55,11 @@ export const countTotalSold = memoize(function countTotalSold(sales: Sale[]) {
 
     return total;
   }, 0);
+});
+
+export const uniqueSalesYears = memoize(function uniqueSalesYears(sales: Sale[]) {
+  return unique(
+    sales.map(sale => sale.releaseYear)
+      .filter(releaseYear => (releaseYear && releaseYear >= 1980))
+  ).sort();
 });
