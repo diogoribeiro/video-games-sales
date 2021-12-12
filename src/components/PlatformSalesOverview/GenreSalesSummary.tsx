@@ -1,6 +1,6 @@
 import React from "react";
 import { SalesSummary } from '../../types';
-import countSalesByGenere from "../../utils/countSalesByGenre";
+import { countSalesByGenere } from "../../utils/sales";
 import SalesGraph from "../SalesGraph";
 
 const GenreSalesSummary: React.FC<SalesSummary>= ({ sales }) =>  {

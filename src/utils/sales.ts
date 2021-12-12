@@ -1,4 +1,4 @@
-import { Period, PlataformsSales, RegionsSales, Sale, SalesRegion } from "../types";
+import { GenresSales, Period, PlataformsSales, RegionsSales, Sale, SalesRegion } from "../types";
 import memoize from 'lodash.memoize';
 
 export const getPlatformSalesByPeriod = memoize(function getPlatformSalesByPeriod(sales: Sale[], platformName: string, period: Period) {
@@ -25,7 +25,7 @@ export const countTotalSalesByRegion = memoize(function countTotalSalesByRegion(
     });
 });
 
-export const countSalesByPlatform = memoize(function countSalesByPlatform (sales: Sale[], period:Period, salesRegion: SalesRegion) {
+export const countSalesByPlatform = memoize(function countSalesByPlatform(sales: Sale[], period:Period, salesRegion: SalesRegion) {
   return sales
     .filter(sale => sale.releaseYear >= period.begin && sale.releaseYear <= period.end)
     .reduce((plataforms:PlataformsSales, sale) => {
@@ -35,4 +35,14 @@ export const countSalesByPlatform = memoize(function countSalesByPlatform (sales
 
       return plataforms;
     }, {});
+});
+
+export const countSalesByGenere = memoize(function countSalesByGenere(sales: Sale[]) {
+  return sales.reduce((plataforms:GenresSales, sale) => {
+    if (!plataforms[sale.genre]) plataforms[sale.genre] = 0;
+    const totalSales = sale.globalSales;
+    if(totalSales) plataforms[sale.genre] += totalSales;
+
+    return plataforms;
+  }, {});
 });
