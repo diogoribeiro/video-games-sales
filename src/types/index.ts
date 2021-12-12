@@ -14,12 +14,13 @@ export type Sale = {
   jpSales: number,
   otherSales: number,
   globalSales: number,
-  criticScore?: number, // not accurate
-  criticCount?: number, // not accurate
-  userScore?: number, // not accurate
-  userCount?: number, // not accurate
-  developer?: string, // not accurate
-  rating?: string, // not accurate
+  // The following properties aren't always filled in the dataset, so they aren't accurate
+  criticScore?: number,
+  criticCount?: number,
+  userScore?: number,
+  userCount?: number,
+  developer?: string,
+  rating?: string,
 }
 
 export type SaleCSV = {
