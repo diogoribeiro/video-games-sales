@@ -4,8 +4,10 @@ import { Period } from "../types";
 import { getPlatformSalesByPeriod } from "../utils/sales";
 
 function usePlatformSales(period: Period) {
-  const { platformName } = useParams<{platformName: string}>();
-  const { state: { sales } } = useSalesProvider();
+  const { platformName } = useParams<{ platformName: string }>();
+  const {
+    state: { sales },
+  } = useSalesProvider();
   const platformSales = getPlatformSalesByPeriod(sales, platformName, period);
 
   return { platformSales, platformName };

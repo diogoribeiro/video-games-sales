@@ -14,13 +14,13 @@
 }
 
 .title {
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   text-decoration: none;
 }
 
 .title > h1 {
-  font-family: 'Bowlby One', cursive;
+  font-family: "Bowlby One", cursive;
   font-size: 50px;
   margin-bottom: 0;
 }
@@ -31,7 +31,7 @@
 }
 
 .body-background::after {
-  background: url('../../bg.jpg') no-repeat, #ffffff;
+  background: url("../../bg.jpg") no-repeat, #ffffff;
   background-blend-mode: exclusion;
   content: '" "';
   display: block;
@@ -46,8 +46,8 @@
 
 .footer {
   align-items: center;
-  background: #F58067;
-  color: #FFF;
+  background: #f58067;
+  color: #fff;
   display: flex;
   height: 36px;
   justify-content: center;

@@ -1,11 +1,11 @@
-import React from 'react';
-import PlatformSalesOverview from '../components/PlatformSalesOverview';
-import { countTotalSalesByRegion } from '../utils/sales';
-import { countTotalSold } from '../utils/sales';
-import useSlider from '../hooks/useSlider';
-import usePlatformSales from '../hooks/usePlatformSales';
+import React from "react";
+import PlatformSalesOverview from "../components/PlatformSalesOverview";
+import { countTotalSalesByRegion } from "../utils/sales";
+import { countTotalSold } from "../utils/sales";
+import useSlider from "../hooks/useSlider";
+import usePlatformSales from "../hooks/usePlatformSales";
 
-const Platform: React.FC= () =>  {
+const Platform: React.FC = () => {
   const { wholePeriod, period, selectPeriod } = useSlider();
   const { platformSales, platformName } = usePlatformSales(period);
   const totalSoldByPlatform = countTotalSold(platformSales);
@@ -22,6 +22,6 @@ const Platform: React.FC= () =>  {
       selectedPeriod={period}
     />
   );
-}
+};
 
 export default Platform;

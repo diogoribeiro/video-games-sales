@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Platform from './pages/Platform';
-import Sales from './pages/Sales';
-import { SalesProvider } from './providers/SalesProvider';
-import useStore from './store';
-import Layout from './components/Layout';
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Platform from "./pages/Platform";
+import Sales from "./pages/Sales";
+import { SalesProvider } from "./providers/SalesProvider";
+import useStore from "./store";
+import Layout from "./components/Layout";
 
-import './App.css';
+import "./App.css";
 
-const App:React.FC = () => {
+const App: React.FC = () => {
   const store = useStore();
   const { actions, state } = store;
   const { loadSales } = actions;
@@ -32,6 +32,6 @@ const App:React.FC = () => {
       </Layout>
     </Router>
   );
-}
+};
 
 export default App;

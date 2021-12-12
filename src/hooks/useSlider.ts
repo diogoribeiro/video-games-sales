@@ -1,4 +1,4 @@
-import { useSalesProvider } from '../providers/SalesProvider';
+import { useSalesProvider } from "../providers/SalesProvider";
 import { uniqueSalesYears } from "../utils/sales";
 
 function useSlider() {
@@ -8,7 +8,7 @@ function useSlider() {
   } = useSalesProvider();
 
   const years = uniqueSalesYears(sales);
-  const wholePeriod = {begin: years[0], end: years[years.length - 1]};
+  const wholePeriod = { begin: years[0], end: years[years.length - 1] };
   const period = salesPeriod || wholePeriod;
 
   return { wholePeriod, period, selectPeriod };

@@ -1,3 +1,3 @@
-export function unique(arr:number[]) {
+export function unique(arr: number[]) {
   return [...new Set(arr)];
 }
